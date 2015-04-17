@@ -26,6 +26,7 @@ GITHUB_SECRET=''
 Now link the package.
 
 ```
+npm install
 npm link .
 ```
 
