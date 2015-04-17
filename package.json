@@ -1,0 +1,28 @@
+{
+  "name": "kraken",
+  "version": "0.0.1",
+  "description": "Group Buddies's Kraken.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Poça <gabriel@groupbbudes.com> (http://groupbuddies.com/)",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.8.0",
+    "dotenv": "^1.1.0",
+    "express": "^4.12.3",
+    "github": "^0.2.3",
+    "googleapis": "^2.0.2",
+    "oauth": "^0.9.12",
+    "promise": "^7.0.0",
+    "ramda": "^0.13.0",
+    "selenium-webdriver": "^2.45.1",
+    "winston": "^1.0.0"
+  },
+  "private": true,
+  "preferGlobal": true,
+  "bin": {
+    "kraken": "index.js"
+  }
+}
