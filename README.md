@@ -31,19 +31,19 @@ npm link .
 
 ## Commands
 
-** Add user to apprenticeship github team. **
+**Add user to apprenticeship github team.**
 
 ```
 kraken github username
 ```
 
-** Invite user to google apps.
+**Invite user to google apps.**
 
 ```
 kraken google email firstName lastName
 ```
 
-** Add user to slack (using selenium). **
+**Add user to slack (using selenium).**
 
 ```
 kraken slack email firstName lastName
