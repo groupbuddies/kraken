@@ -4,6 +4,7 @@ var child_process = require('child_process');
 var webdriver = require('selenium-webdriver');
 
 var By = webdriver.By;
+var until = webdriver.until;
 
 var URI = {
   slack: 'https://groupbuddies.slack.com',
@@ -33,25 +34,32 @@ var login = function(browser) {
   browser.findElement(By.id('signin_btn')).click();
 };
 
-var fillUserInformation = function(browser, email, firstName, lastName) {
-  browser.findElement(By.name('email_address')).sendKeys(email);
-  browser.findElement(By.name('first_name')).sendKeys(firstName);
-  browser.findElement(By.name('last_name')).sendKeys(lastName);
+var fillUserInformation = function(browser, user) {
+  return browser
+    .wait(until.elementLocated(By.name('email_address')), 3 * 1000)
+    .then(function() {
+      browser.findElement(By.name('email_address')).sendKeys(user.email);
+      browser.findElement(By.name('first_name')).sendKeys(user.firstName);
+      browser.findElement(By.name('last_name')).sendKeys(user.lastName);
+    });
 };
 
-module.exports = function(email, firstName, lastName) {
-  logger.log('info', 'slack details: %s %s <%s>', firstName, lastName, email);
+var successMessage = function() {
+  logger.info('There is a new chrome window open,'
+              + ' go there and finish the invitation process.');
+};
+
+module.exports = function(user) {
+  logger.log('info', 'slack details', user);
 
   return verifyDependencies()
     .then(function() {
-      var browser = new webdriver.Builder()
-        .forBrowser('chrome')
-        .build();
+      var browser = new webdriver.Builder().forBrowser('chrome').build();
 
       browser.get(URI.slack);
       login(browser);
       browser.get(URI.slackInvites);
-      fillUserInformation(browser, email, firstName, lastName);
-      //browser.findElement(By.css('.api_send_invites')).click();
-    });
+      return fillUserInformation(browser, user);
+    })
+    .then(successMessage);
 };
