@@ -1,12 +1,14 @@
 var Q = require('q');
-var google = require('googleapis');
-var OAuth2 = google.auth.OAuth2;
 
 var clientId = process.env.GOOGLE_CLIENT_ID;
 var clientSecret = process.env.GOOGLE_CLIENT_SECRET;
 var redirectURL = 'http://localhost:3006/google/callback';
 
+var google = require('googleapis');
+var OAuth2 = google.auth.OAuth2;
 var oauth2Client = new OAuth2(clientId, clientSecret, redirectURL);
+
+var admin = google.admin('directory_v1');
 google.options({ auth: oauth2Client });
 
 var scopes = [
@@ -41,7 +43,6 @@ module.exports = {
   admin: {
     users: {
       insert: function(options) {
-        var admin = google.admin('directory_v1');
         return Q.nfcall(admin.users.insert, options);
       }
     }

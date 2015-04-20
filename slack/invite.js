@@ -1,5 +1,7 @@
+var Application = require('../application');
 var logger = require('../logger');
-var Promise = require('promise');
+var Q = require('q');
+var R = require('ramda');
 var child_process = require('child_process');
 var webdriver = require('selenium-webdriver');
 
@@ -12,10 +14,10 @@ var URI = {
 };
 
 var verifyDependencies = function() {
-  return new Promise(function(resolve, reject) {
+  return new Q.Promise(function(resolve, reject) {
     child_process.exec('chromedriver -v', function(err) {
       if (err) {
-        var errorMsg = 'It appears chromedriver is not installed. ' + 
+        var errorMsg = 'It appears chromedriver is not installed. ' +
           'Please install "chromedriver" and try again.\n' +
           'If you\'re using Homebre you can run "brew install chromedriver".';
 
@@ -32,9 +34,10 @@ var login = function(browser) {
   browser.findElement(By.id('email')).sendKeys(process.env.SLACK_EMAIL);
   browser.findElement(By.id('password')).sendKeys(process.env.SLACK_PASSWORD);
   browser.findElement(By.id('signin_btn')).click();
+  return browser;
 };
 
-var fillUserInformation = function(browser, user) {
+var fillUserInformation = function(user, browser) {
   return browser
     .wait(until.elementLocated(By.name('email_address')), 3 * 1000)
     .then(function() {
@@ -49,17 +52,22 @@ var successMessage = function() {
               + ' go there and finish the invitation process.');
 };
 
+var errorMessage = function(err) {
+  logger.falat(err);
+  throw err;
+};
+
 module.exports = function(user) {
   logger.log('info', 'slack details', user);
 
   return verifyDependencies()
     .then(function() {
-      var browser = new webdriver.Builder().forBrowser('chrome').build();
-
-      browser.get(URI.slack);
-      login(browser);
-      browser.get(URI.slackInvites);
-      return fillUserInformation(browser, user);
+      return new webdriver.Builder().forBrowser('chrome').build();
     })
-    .then(successMessage);
+    .then(R.tap(R.invoke('get', [URI.slack])))
+    .then(login)
+    .then(R.tap(R.invoke('get', [URI.slackInvites])))
+    .then(R.curry(fillUserInformation)(user))
+    .then(successMessage)
+    .catch(errorMessage);
 };

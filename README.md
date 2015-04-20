@@ -1,7 +1,7 @@
 Kraken
 =================
 
-Kraken does everything. He doesn't live to serve you, but he'll come to aid those who prove themselves worthy. You cannot tame Kraken, you can redirect his power. Kraken doesn't know everything, but you can [teach him](#contributing). Don't get full of yourself, you're not mighty, Kraken is. He'll bite your ass.
+Kraken does everything. He doesn't live to serve you, but he'll come to aid those who prove themselves worthy. You cannot tame Kraken, but you can use his power. Kraken doesn't know everything, but you can [teach him](#contributing). Don't get full of yourself, you're not mighty, Kraken is. He'll bite your ass.
 
 ## Quick Start
 
@@ -23,7 +23,7 @@ GITHUB_ID=''
 GITHUB_SECRET=''
 ```
 
-Now link the package.
+Install the dependencies and link the package.
 
 ```
 npm install
@@ -31,6 +31,14 @@ npm link .
 ```
 
 ## Commands
+
+To add a new apprentice to all the supported services run the following command and answer the questions. You can run the command multiple times.
+
+```
+kraken apprenticeship
+```
+
+### Individual Commands
 
 **Add user to apprenticeship github team.**
 

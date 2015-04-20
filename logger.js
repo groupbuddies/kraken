@@ -36,7 +36,7 @@ var origLog = logger.log;
 logger.log = function(level, msg) {
   var objType = Object.prototype.toString.call(msg);
   if (objType === '[object Error]') {
-    origLog.call(logger, level, msg.toString());
+    origLog.apply(logger, [level, msg.toString()]);
   } else {
     origLog.apply(logger, arguments);
   }

@@ -2,6 +2,7 @@ var R = require('ramda');
 var Q = require('q');
 var spawn = require('child_process').spawn;
 
+var Application = require('../application');
 var logger = require('../logger');
 var API = require('./api');
 var User = require('../utils/user');
@@ -10,7 +11,7 @@ var express = require('express');
 var successMessage = 'Successfully created google account for %s with password %s.';
 var errorMessage = 'Failed to create google account for %s.';
 
-var openAcceptURL = function() {
+var openAuthorizationURL = function() {
   spawn('open', [API.authorizationURL()]);
 };
 
@@ -26,11 +27,14 @@ var insertUser = function(user) {
     }
   };
 
-  return API.admin.users.insert(options);
+  if (Application.development)
+    return Q(true);
+  else
+    return API.admin.users.insert(options);
 };
 
 module.exports = function(user) {
-  var user = User.withPassword(user);
+  user = User.withPassword(user);
 
   var insertUserFromArgs = R.curryN(2, insertUser)(user);
 
@@ -60,7 +64,7 @@ module.exports = function(user) {
       });
   });
 
-  openAcceptURL();
+  openAuthorizationURL();
 
   return deferred.promise;
 };

@@ -47,7 +47,7 @@ var setCode = function(code) {
     .then(setAccessToken);
 };
 
-var redirectURL = function() {
+var authorizationURL = function() {
   return oauth.getAuthorizeUrl({
     redirect_uri: 'http://localhost:3005/github/callback',
     scope: 'user,repo,gist'
@@ -55,7 +55,7 @@ var redirectURL = function() {
 };
 
 module.exports = {
-  redirectURL: redirectURL,
+  authorizationURL: authorizationURL,
   setCode: setCode,
   orgs: {
     addTeamMember: Q.denodeify(github.orgs.addTeamMember)

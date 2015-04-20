@@ -1,4 +1,3 @@
-var R = require('ramda');
 var inquirer = require('inquirer');
 
 var questions = [
@@ -24,18 +23,18 @@ var questions = [
   }
 ];
 
-module.exports = function(options) {
-  var inviteToSlack = require('./services/slack');
-  var inviteToGoogle = require('./services/google');
+module.exports = function() {
+  var Slack = require('./slack/index');
+  var Google = require('./google/index');
   var Github = require('./github/index');
 
   inquirer.prompt(questions, function(answers) {
     Github.addApprentice(answers.githubUsername)
       .then(function() {
-        inviteToGoogle(answers, options);
+        return Google.invite(answers);
       })
       .then(function() {
-        inviteToSlack(answers, options);
+        return Slack.invite(answers);
       })
       .finally(function() {
         process.exit();
