@@ -1,30 +1,19 @@
 {
   "name": "kraken",
-  "version": "0.0.1",
-  "description": "Group Buddies's Kraken.",
+  "version": "0.0.0",
+  "description": "Kraken does everything",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Gabriel Poça <gabriel@groupbbudes.com> (http://groupbuddies.com/)",
-  "license": "ISC",
-  "dependencies": {
-    "commander": "^2.8.0",
-    "dotenv": "^1.1.0",
-    "express": "^4.12.3",
-    "github": "^0.2.3",
-    "googleapis": "^2.0.2",
-    "inquirer": "^0.8.2",
-    "oauth": "^0.9.12",
-    "promise": "^7.0.0",
-    "q": "^1.2.0",
-    "ramda": "^0.13.0",
-    "selenium-webdriver": "^2.45.1",
-    "winston": "^1.0.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/subvisual/kraken.git"
   },
-  "private": true,
-  "preferGlobal": true,
-  "bin": {
-    "kraken": "index.js"
-  }
+  "author": "Gabriel Poça <gabrielpoca@gmail.com> (http://gabrielpoca.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/subvisual/kraken/issues"
+  },
+  "homepage": "https://github.com/subvisual/kraken"
 }
