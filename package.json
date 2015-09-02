@@ -2,18 +2,28 @@
   "name": "kraken",
   "version": "0.0.0",
   "description": "Kraken does everything",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel lib --out-dir dist",
+    "start": "npm run build && Q_DEBUG=1 NODE_PATH=dist node dist/index.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/subvisual/kraken.git"
   },
-  "author": "Gabriel Poça <gabrielpoca@gmail.com> (http://gabrielpoca.com/)",
+  "author": "Gabriel Poça <gabriel@subvisual.co> (http://gabrielpoca.com/)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/subvisual/kraken/issues"
   },
-  "homepage": "https://github.com/subvisual/kraken"
+  "homepage": "https://github.com/subvisual/kraken",
+  "dependencies": {
+    "dotenv": "^1.2.0",
+    "octonode": "^0.7.1",
+    "q": "^1.4.1",
+    "vantage": "^1.5.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23"
+  }
 }
