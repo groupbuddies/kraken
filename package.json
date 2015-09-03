@@ -19,6 +19,7 @@
   "homepage": "https://github.com/subvisual/kraken",
   "dependencies": {
     "dotenv": "^1.2.0",
+    "googleapis": "^2.1.3",
     "octonode": "^0.7.1",
     "q": "^1.4.1",
     "vantage": "^1.5.1"
