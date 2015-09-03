@@ -1,6 +1,6 @@
 'use strict';
 
-var Q = require('Q');
+var Q = require('q');
 var google = require('googleapis');
 
 var scopes = ['https://www.googleapis.com/auth/admin.directory.group', 'https://www.googleapis.com/auth/admin.directory.user'];
