@@ -1,3 +1,5 @@
+var path = require('path2/posix');
+
 var options = {
   default: {
     workspace: '/tmp/kraken',
@@ -7,6 +9,9 @@ var options = {
     keepReleases: 2,
     shared: {
       files: [ 'kraken.json', '.env' ]
+    },
+    pm2: {
+      json: path.join(shipit.config.deployTo, 'current', 'pm2.json')
     }
   },
   npm: {

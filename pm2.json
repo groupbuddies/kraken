@@ -1,0 +1,11 @@
+{
+  "apps": [{
+    "name"        : "kraken",
+    "script"      : "dist/index.js",
+    "watch"       : true,
+    "cwd"         : "/apps/kraken/current/",
+    "env": {
+      "NODE_PATH": "dist"
+    }
+  }]
+}
