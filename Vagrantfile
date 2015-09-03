@@ -7,7 +7,7 @@
 # you're doing.
 Vagrant.configure(2) do |config|
   config.vm.box = "hashicorp/precise32"
-  config.vm.network :forwarded_port, guest: 8080, host: 8080
+  config.vm.network :forwarded_port, guest: 4001, host: 8080
 
   config.vm.provision :shell,
     inline: 'wget -qO - https://raw.githubusercontent.com/groupbuddies/gb-puppet/master/setup/ubuntu | sh'

@@ -18,7 +18,7 @@ module.exports = function(shipit) {
         files: [ 'kraken.json', '.env' ]
       },
       pm2: {
-        json: '/apps/kraken/current/pm2.json'
+        json: 'pm2.json'
       }
     },
     npm: {
